@@ -15,7 +15,7 @@
         "antd": "^5.11.2",
         "apexcharts": "^3.44.2",
         "axios": "^1.6.0",
-        "chart.js": "latest_version",
+
         "moment": "^2.29.4",
         "react": "^18.2.0",
         "react-apexcharts": "^1.4.1",

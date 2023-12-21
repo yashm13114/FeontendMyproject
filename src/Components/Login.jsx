@@ -8,67 +8,68 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
+import Loader from './Loader';
 const Login = () => {
     initTE({ Input, Ripple });
     const { state, dispatch } = useContext(UserContext)
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const LoginUser = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true when login is initiated
 
-        const res = await fetch('http://localhost:5000/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
-        })
+        try {
+            const res = await fetch('http://localhost:5000/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            })
 
+            const data = await res.json()
 
-        const data = res.json()
-
-        if (res.status === 400 || !data) {
-            toast.error("Invalid Credentials")
-        } else {
-            if (email !== email || password !== password) {
-
-
-                toast.error("Invalid Credentials", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored"
-                })
-
-
+            if (res.status === 400 || !data) {
+                toast.error("Invalid Credentials")
+            } else {
+                if (email !== email || password !== password) {
+                    toast.error("Invalid Credentials", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored"
+                    })
+                } else {
+                    dispatch({ type: "USER", payload: true })
+                    localStorage.setItem('user', JSON.stringify({ ...data, password, email }))
+                    toast.success("Login Successfully 🤩", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    })
+                    navigate("/Dashboard")
+                }
             }
-            else {
-                dispatch({ type: "USER", payload: true })
-                localStorage.setItem('user', JSON.stringify({ ...data, password, email }))
-                toast.success("Login Successfully 🤩", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                })
-                navigate("/Dashboard")
-
-            }
-
+        } catch (error) {
+            console.error("Error during login:", error);
+            toast.error("An error occurred during login");
+        } finally {
+            setLoading(false); // Set loading back to false after login attempt
         }
-
-
     }
+
     return (
         <>
             <section className="h-screen">
@@ -133,14 +134,18 @@ const Login = () => {
                                 {/* <p className='flex justify-center'>Don't have an account?<a href="/Register">Register</a></p> */}
                                 <p className='flex justify-center'>Don't have an account?<Link to="/Register">Register</Link></p>
 
-                                <div className='grid justify-center'>
-                                    <button
-                                        type="submit"
-                                        onClick={LoginUser}
-                                        className="relative w-52 px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-black before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-black hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700"
-                                    >
-                                        Login
-                                    </button>
+                                <div className="grid justify-center">
+                                    {loading ? (
+                                        <Loader />
+                                    ) : (
+                                        <button
+                                            type="submit"
+                                            onClick={LoginUser}
+                                            className="relative w-52 px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-black before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-black hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700"
+                                        >
+                                            Login
+                                        </button>
+                                    )}
                                 </div>
 
                             </form>

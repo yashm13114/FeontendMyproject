@@ -7,12 +7,14 @@ import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import { MdDelete } from "react-icons/md";
 import Analytics from './Analytics';
 import { toast } from 'react-toastify';
+import Loader from './Loader';
 const ManageExpense = () => {
     const [allTransactions, setallTransactions] = useState([])
     const [transactions, setTransactions] = useState([]);
     const [editable, setEditable] = useState(null);
     const [form] = Form.useForm();
     const [updateForm, setUpdateForm] = useState(null);
+    const [loading, setLoading] = useState(false);
     // update values
     const handleEdit = (record) => {
         setEditable(record._id);
@@ -242,15 +244,19 @@ const ManageExpense = () => {
                     <button onClick={() => setUpdateForm(null)}>Cancel</button>
                 </div>
             )}
-           
+
             <div className='lg:flex lg:justify-center mt-10'>
                 <Form form={form} component={false}>
-                    <div className='overflow-x-auto'>
-                        <Table dataSource={allTransactions} columns={columns} />
-                    </div>
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <div className='overflow-x-auto'>
+                            <Table dataSource={allTransactions} columns={columns} />
+                        </div>
+                    )}
                 </Form>
             </div>
-         
+
 
 
 

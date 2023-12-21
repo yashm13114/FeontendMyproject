@@ -7,13 +7,14 @@ import {
 } from "tw-elements";
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
+import Loader from './Loader';
 const Register = () => {
     initTE({ Input, Ripple });
     const navigate = useNavigate();
     const [user, setUser] = useState({
         name: "", email: "", password: "", cpassword: ""
     })
-
+    const [loading, setLoading] = useState(false);
     let name, value;
 
     const handleInputs = (e) => {
@@ -191,17 +192,20 @@ const Register = () => {
                                         data-te-ripple-color="dark">
                                         Register
                                     </button> */}
-                                    <div className='flex justify-start'>
+                                     <div className="grid justify-center">
+                                    {loading ? (
+                                        <Loader />
+                                    ) : (
                                         <button
                                             type="submit"
                                             onClick={postData}
                                             className="relative w-52 px-8 py-2 rounded-md bg-white isolation-auto z-10 border-2 border-black before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-black hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700"
                                         >
-                                            Register
+                                               Register
                                         </button>
-                                        <Link to="/Login" className='ml-4 grid justify-center items-center'>Already have an account?</Link>
-                                    </div>
-                                    {/* <a href="/Login" className='ml-4'>Already have an account?</a> */}
+                                    )}
+                                </div>
+                    
                                   
 
 
