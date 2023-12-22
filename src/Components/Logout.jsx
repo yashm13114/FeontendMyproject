@@ -52,7 +52,7 @@ const Logout = () => {
   useEffect(() => {
     const logoutUser = async () => {
       try {
-        const response = await fetch('http://localhost:5000/logout', {
+        const response = await fetch('https://server-yash.onrender.com/logout', {
           method: 'GET',
           headers: {
             Accept: 'application/json',

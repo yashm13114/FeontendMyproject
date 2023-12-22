@@ -8,7 +8,7 @@ const Reset = () => {
         e.preventDefault();
         const { email } = mail;
         console.log(email);
-        fetch("http://localhost:5000/forgot-password", {
+        fetch("https://server-yash.onrender.com/forgot-password", {
             method: "POST",
             crossDomain: true,
             headers: {

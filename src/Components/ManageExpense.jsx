@@ -31,7 +31,7 @@ const ManageExpense = () => {
     const handleSave = async (record) => {
         try {
             const updatedTransaction = form.getFieldsValue();
-            const res = await fetch(`http://localhost:5000/update-transaction/${record._id}`, {
+            const res = await fetch(`https://server-yash.onrender.com/update-transaction/${record._id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -69,7 +69,7 @@ const ManageExpense = () => {
     const getAllTransactions = async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
-            const res = await fetch('http://localhost:5000/get-transaction', {
+            const res = await fetch('https://server-yash.onrender.com/get-transaction', {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -105,7 +105,7 @@ const ManageExpense = () => {
     // delete values
     const handleDelete = async (record) => {
         try {
-            const res = await fetch(`http://localhost:5000/delete-transaction/${record._id}`, {
+            const res = await fetch(`https://server-yash.onrender.com/delete-transaction/${record._id}`, {
                 method: 'DELETE',
                 headers: {
                     Accept: 'application/json',

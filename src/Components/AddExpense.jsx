@@ -52,7 +52,7 @@ const AddExpense = ({ thisYearExpense, income }) => {
 
         } else {
             const user = JSON.parse(localStorage.getItem('user'))
-            const res = await fetch('http://localhost:5000/add-transaction', {
+            const res = await fetch('https://server-yash.onrender.com/add-transaction', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

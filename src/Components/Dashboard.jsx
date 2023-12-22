@@ -236,7 +236,7 @@ const Dashboard = ({ thisYearExpense }) => {
       const last30Days = moment().subtract(30, 'days').format('YYYY-MM-DD');
       const thisYearStart = moment().startOf('year').format('YYYY-MM-DD');
 
-      const response = await fetch('http://localhost:5000/get-transaction');
+      const response = await fetch('https://server-yash.onrender.com/get-transaction');
 
       if (response.ok) {
         const data = await response.json();
@@ -261,7 +261,7 @@ const Dashboard = ({ thisYearExpense }) => {
   const getAllTransactions = async () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'))
-      const res = await fetch('http://localhost:5000/get-transaction', {
+      const res = await fetch('https://server-yash.onrender.com/get-transaction', {
         method: 'GET',
         headers: {
           Accept: "application/json",
