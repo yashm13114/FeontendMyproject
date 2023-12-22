@@ -41,6 +41,7 @@ const Register = () => {
                 progress: undefined,
                 theme: "colored"
             })
+     
 
         } else {
             if (password !== cpassword) {
@@ -54,6 +55,7 @@ const Register = () => {
                     progress: undefined,
                     theme: "colored"
                 })
+    
             } else {
 
                 const res = await fetch('https://server-yash.onrender.com/register', {
@@ -92,6 +94,7 @@ const Register = () => {
                         theme: "colored"
                     })
                     navigate('/Login')
+                    setLoading(true);
                     console.log("register successfully");
 
                 }

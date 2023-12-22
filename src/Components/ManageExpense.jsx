@@ -68,6 +68,7 @@ const ManageExpense = () => {
     // get values
     const getAllTransactions = async () => {
         try {
+            setLoading(true);
             const user = JSON.parse(localStorage.getItem('user'))
             const res = await fetch('https://server-yash.onrender.com/get-transaction', {
                 method: 'GET',
@@ -83,14 +84,16 @@ const ManageExpense = () => {
 
             if (res.status === 200) {
                 console.log("successful")
+                setLoading(false);
 
             } else {
                 const error = new Error(res.error);
                 throw error;
+                setLoading(false);
             }
         } catch (err) {
             console.log("err " + err)
-
+            setLoading(false);
 
 
         }

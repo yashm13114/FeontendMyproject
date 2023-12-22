@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import Loader from './Loader';
 const AddExpense = ({ thisYearExpense, income }) => {
     const [expense, setExpense] = useState({
         amount: "", type: "", category: "", reference: "", description: "", date: ""
     })
     const [isFormDisabled, setIsFormDisabled] = useState(false);
+    const [loading, setLoading] = useState(false);
     let name, value;
 
     const handleInputs = (e) => {
@@ -18,23 +20,23 @@ const AddExpense = ({ thisYearExpense, income }) => {
         if (remainingIncomeAfterExpense < 0.7 * income) {
             // Show a warning message or take any action
             alert("Warning: You have used 70% of your income. Are you sure you want to spend?");
-          }
-      
-          if (remainingIncomeAfterExpense <= 0) {
+        }
+
+        if (remainingIncomeAfterExpense <= 0) {
             // Disable the form and show a message
             setIsFormDisabled(true);
             alert("You have used 100% of your income. Form disabled.");
-          } else {
+        } else {
             // Enable the form if the user has not spent 100%
             setIsFormDisabled(false);
-          }
-      
+        }
+
         setExpense({ ...expense, [name]: value });
     }
 
     const postData = async (e) => {
         e.preventDefault();
-
+    
         const { amount, type, category, reference, description, date } = expense
 
 
@@ -62,7 +64,7 @@ const AddExpense = ({ thisYearExpense, income }) => {
                 }),
 
             }, { ...e, userid: user._id })
-
+     
             const data = await res.json()
             toast.success("Transaction Added Successfully ", {
                 position: "top-right",
@@ -74,7 +76,8 @@ const AddExpense = ({ thisYearExpense, income }) => {
                 progress: undefined,
                 theme: "colored",
             })
-            
+        
+
 
         }
     }
@@ -133,15 +136,17 @@ const AddExpense = ({ thisYearExpense, income }) => {
                                     <label className="block mb-3 text-sm font-medium text-gray-600"> Date  </label>
                                     <input value={expense.date} onChange={handleInputs} name='date' type="date" placeholder="" className="block w-full px-6 py-3 text-black bg-white border border-gray-200 rounded-full appearance-none placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" />
                                 </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={isFormDisabled}
-                                    className={`items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black`}
-                                >
-                                    Submit your request
-                                </button>
-
+                                {loading ? (
+                                    <Loader />
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        disabled={isFormDisabled}
+                                        className={`items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black`}
+                                    >
+                                        Submit your request
+                                    </button>
+                                )}
                             </div>
                         </form>
                     </div>

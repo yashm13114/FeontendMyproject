@@ -125,7 +125,7 @@
 //       theme: "colored"
 //     })
 //   }
-  
+
 
 //   const renderGraph = () => {
 //     switch (selectedGraph) {
@@ -187,7 +187,7 @@
 //           {isExpenseHigh && (
 //             <p className='text-red-600 font-semibold text-center mb-7'>
 //               Warning: Your expenses are higher than your income. Please control your expenses.
-      
+
 //             </p>
 
 //           )}
@@ -213,7 +213,7 @@ import Analytics from './Analytics';
 import ReactApexChart from 'react-apexcharts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Loader from './Loader';
 const Dashboard = ({ thisYearExpense }) => {
   const [todayExpense, setTodayExpense] = useState(0);
   const [last7DaysExpense, setLast7DaysExpense] = useState(0);
@@ -221,7 +221,7 @@ const Dashboard = ({ thisYearExpense }) => {
   const [currentYearExpense, setCurrentYearExpense] = useState(0);
   const [allTransactions, setAllTransactions] = useState([]);
   const [selectedGraph, setSelectedGraph] = useState('line');
-
+  const [loading, setLoading] = useState(false);
   const animatedProps = useSpring({
     opacity: 1,
     from: { opacity: 0 },
@@ -231,6 +231,7 @@ const Dashboard = ({ thisYearExpense }) => {
   // Fetch expenses for today, last 7 days, last 30 days, and this year
   const fetchExpenses = async () => {
     try {
+      setLoading(true);
       const today = moment().format('YYYY-MM-DD');
       const last7Days = moment().subtract(7, 'days').format('YYYY-MM-DD');
       const last30Days = moment().subtract(30, 'days').format('YYYY-MM-DD');
@@ -250,16 +251,20 @@ const Dashboard = ({ thisYearExpense }) => {
         setLast7DaysExpense(last7DaysExpenses.reduce((total, expense) => total + expense.amount, 0));
         setLast30DaysExpense(last30DaysExpenses.reduce((total, expense) => total + expense.amount, 0));
         setCurrentYearExpense(thisYearExpenses.reduce((total, expense) => total + expense.amount, 0));
+
       } else {
         console.error('Failed to fetch expenses');
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error fetching expenses:', error);
+      setLoading(false);
     }
   };
 
   const getAllTransactions = async () => {
     try {
+      setLoading(true);
       const user = JSON.parse(localStorage.getItem('user'))
       const res = await fetch('https://server-yash.onrender.com/get-transaction', {
         method: 'GET',
@@ -277,9 +282,11 @@ const Dashboard = ({ thisYearExpense }) => {
       } else {
         const error = new Error(res.error);
         throw error;
+        setLoading(false);
       }
     } catch (err) {
       console.log("err " + err)
+      setLoading(false);
     }
   }
 
@@ -358,51 +365,57 @@ const Dashboard = ({ thisYearExpense }) => {
   };
 
   return (
+
     <animated.div style={animatedProps}>
-      <div className='container mx-auto p-10'>
-        <div className='lg:pl-72 lg:pr-72 pl-0 pr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
-          <Card title="Today's Expense" className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
-            <p className='text-lg font-semibold mb-2'>Total: ₹{todayExpense}</p>
-          </Card>
-          <Card title='Last 7 days Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200  rounded-md' bordered={false}>
-            <p className='text-lg font-semibold mb-2'>Total: ₹{last7DaysExpense}</p>
-          </Card>
-        </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className='container mx-auto p-10'>
+          <div className='lg:pl-72 lg:pr-72 pl-0 pr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
+            <Card title="Today's Expense" className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
+              <p className='text-lg font-semibold mb-2'>Total: ₹{todayExpense}</p>
+            </Card>
+            <Card title='Last 7 days Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200  rounded-md' bordered={false}>
+              <p className='text-lg font-semibold mb-2'>Total: ₹{last7DaysExpense}</p>
+            </Card>
+          </div>
 
-        <div className='lg:pl-72 lg:pr-72 pl-0 pr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4'>
-          <Card title='Last 30 days Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
-            <p className='text-lg font-semibold mb-2'>Total: ₹{last30DaysExpense}</p>
-          </Card>
-          <Card title='This Year Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
-            <p className='text-lg font-semibold mb-2'>Total: ₹{currentYearExpense}</p>
-          </Card>
-        </div>
-        <div className='container lg:pl-52 lg:pr-44 pl-0 pr-0 mt-14'>
-          <div className=' '>
+          <div className='lg:pl-72 lg:pr-72 pl-0 pr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4'>
+            <Card title='Last 30 days Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
+              <p className='text-lg font-semibold mb-2'>Total: ₹{last30DaysExpense}</p>
+            </Card>
+            <Card title='This Year Expense' className='bg-gray-100 hover:scale-105 hover:ease-in hover:bg-gray-200 rounded-md' bordered={false}>
+              <p className='text-lg font-semibold mb-2'>Total: ₹{currentYearExpense}</p>
+            </Card>
+          </div>
+          <div className='container lg:pl-52 lg:pr-44 pl-0 pr-0 mt-14'>
             <div className=' '>
-              {/* Graph Options */}
-              <div className='flex justify-center mb-4'>
-                <button className={`mr-2 ${selectedGraph === 'line' ? 'bg-black text-white rounded-md p-1 pl-2 pr-2' : 'bg-gray-300 rounded-md p-1 pl-2 pr-2'}`} onClick={() => handleGraphChange('line')}>Line Graph</button>
-                <button className={`ml-2 ${selectedGraph === 'bar' ? 'bg-black text-white rounded-md p-1 pl-2 pr-2' : 'bg-gray-300 rounded-md p-1 pl-2 pr-2'}`} onClick={() => handleGraphChange('bar')}>Pie Graph</button>
-              </div>
+              <div className=' '>
+                {/* Graph Options */}
+                <div className='flex justify-center mb-4'>
+                  <button className={`mr-2 ${selectedGraph === 'line' ? 'bg-black text-white rounded-md p-1 pl-2 pr-2' : 'bg-gray-300 rounded-md p-1 pl-2 pr-2'}`} onClick={() => handleGraphChange('line')}>Line Graph</button>
+                  <button className={`ml-2 ${selectedGraph === 'bar' ? 'bg-black text-white rounded-md p-1 pl-2 pr-2' : 'bg-gray-300 rounded-md p-1 pl-2 pr-2'}`} onClick={() => handleGraphChange('bar')}>Pie Graph</button>
+                </div>
 
-              {/* Render Selected Graph */}
-              {renderGraph()}
+                {/* Render Selected Graph */}
+                {renderGraph()}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className=' mt-14 grid justify-center'>
-          {isExpenseHigh && (
-            <p className='text-red-600 font-semibold text-center mb-7'>
-              Warning: Your expenses are higher than your income. Please control your expenses.
-            </p>
-          )}
-          <Analytics allTransactions={allTransactions} />
+          <div className=' mt-14 grid justify-center'>
+            {isExpenseHigh && (
+              <p className='text-red-600 font-semibold text-center mb-7'>
+                Warning: Your expenses are higher than your income. Please control your expenses.
+              </p>
+            )}
+            <Analytics allTransactions={allTransactions} />
+          </div>
         </div>
-      </div>
+      )}
     </animated.div>
-  );
-};
+  )
+}
+
 
 export default Dashboard;
