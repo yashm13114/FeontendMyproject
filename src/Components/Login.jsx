@@ -22,7 +22,7 @@ const Login = () => {
         setLoading(true); // Set loading to true when login is initiated
 
         try {
-            const res = await fetch('http://localhost:5000/login', {
+            const res = await fetch('https://server-yash.onrender.com/login', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

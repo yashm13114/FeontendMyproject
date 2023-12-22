@@ -204,6 +204,7 @@ const Register = () => {
                                                Register
                                         </button>
                                     )}
+                                           <Link to="/Login" className='ml-4'>Already have an account?</Link>
                                 </div>
                     
                                   
