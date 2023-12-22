@@ -1,0 +1,21 @@
+@media screen and (max-width: 355px) {
+    .analytic {
+        padding-left: 20px;
+        display: grid;
+        justify-content: center;
+        align-items: c;
+    }
+}
+
+@media screen and (min-width: 321px) {
+    .analytic {
+        padding-left: 45px;
+    }
+}
+
+@media screen and (min-width: 312) {
+    .analytic {
+        padding-left: 70px;
+        padding-right: 10px;
+    }
+}
