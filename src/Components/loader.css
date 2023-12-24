@@ -21,6 +21,7 @@
 }
 
 .loader::before {
+    content: "Loading...";
     line-height: 1em;
     color: #0000;
     background: inherit;
