@@ -15,6 +15,8 @@ import AddExpense from './Components/AddExpense'
 import ForgotPass from './Components/ForgotPass'
 import Analytics from './Components/Analytics'
 import AnalyticsExpense from './Components/AnalyticsExpense'
+import AddExpense2 from './Components/AddExpense2'
+import Home2 from './Components/Home2'
 export const UserContext = createContext()
 const Routnig = () => {
   return (
@@ -33,6 +35,7 @@ const Routnig = () => {
         <Route path="/Reset" element={<Reset />} />
         <Route path="/Analytics" element={<Analytics />} />
         <Route path="/ForgotPass" element={<ForgotPass />} />
+        <Route path="/AddExpense2" element={<AddExpense2 />} />
 
       </Routes>
     </BrowserRouter>

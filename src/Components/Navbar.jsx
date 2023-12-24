@@ -107,7 +107,7 @@ const Navbar = () => {
                   <h3 className="text-base flex text-gray-800 group-hover:text-white font-semibold " >
                     <FaCirclePlus className="text-xl text-gray-600 group-hover:text-white " />
                     {/* <a href="" className='ml-4'>Add Expense</a> */}
-                    <Link href="" className='ml-4'>Add Expense</Link>
+                    <Link to="/AddExpense2" className='ml-4'>Add Expense</Link>
                   </h3>
                 </div>
                 <div  className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
@@ -123,7 +123,7 @@ const Navbar = () => {
                   <h3 className="text-base flex text-gray-800 group-hover:text-white font-semibold pr-7">
                     <AiOutlineLogin className="text-2xl text-gray-600 group-hover:text-white mr-4" />
                     {/* <a href="/Register" className=''>Login/Register</a> */}
-                    <Link to="/Register" className=''>Login/Register</Link>
+                    <Link to="/Login" className=''>Login/Register</Link>
                   </h3>
                 </div>
 

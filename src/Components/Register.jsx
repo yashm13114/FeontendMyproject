@@ -57,7 +57,7 @@ const Register = () => {
                 })
     
             } else {
-
+                setLoading(true);
                 const res = await fetch('https://server-yash.onrender.com/register', {
                     method: "POST",
                     headers: {
@@ -96,7 +96,7 @@ const Register = () => {
                     navigate('/Login')
                     setLoading(true);
                     console.log("register successfully");
-
+                    setLoading(false); 
                 }
             }
         }

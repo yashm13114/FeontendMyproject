@@ -1,44 +1,101 @@
-#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #141414;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 7px 7px 10px 3px #24004628;
 }
 
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
 }
 
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+
+/*checkbox to switch from sign up to login*/
+
+#chk {
+    display: none;
 }
 
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
+
+/*Login*/
+
+.login {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.login label {
+    margin: 25% 0 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
+label {
+    color: #fff;
+    font-size: 2rem;
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
 }
 
-.card {
-    padding: 2em;
+.input {
+    width: 100%;
+    height: 40px;
+    background: #e0dede;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
 }
 
-.read-the-docs {
-    color: #888;
+
+/*Register*/
+
+.register {
+    background: #eee;
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10%;
+    transform: translateY(5%);
+    transition: .8s ease-in-out;
+}
+
+.register label {
+    color: #131313;
+    transform: scale(.6);
+}
+
+#chk:checked~.register {
+    transform: translateY(-60%);
+}
+
+#chk:checked~.register label {
+    transform: scale(1);
+    margin: 10% 0 5%;
+}
+
+#chk:checked~.login label {
+    transform: scale(.6);
+    margin: 5% 0 5%;
+}
+
+
+/*Button*/
+
+.form button {
+    width: 85%;
+    height: 40px;
+    margin: 12px auto 10%;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Home = () => {
+const Home2 = () => {
   return (
     <>
       <div className='lg:flex items-center mt-32 justify-center lg:ml-44 '>
@@ -16,10 +16,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
      
       
     </>
   )
 }
 
-export default Home
+export default Home2
