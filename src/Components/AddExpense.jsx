@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from './Loader';
+import  '../App.css';
 const AddExpense = ({ thisYearExpense, income }) => {
     const [expense, setExpense] = useState({
         amount: "", type: "", category: "", reference: "", description: "", date: ""
@@ -36,7 +37,7 @@ const AddExpense = ({ thisYearExpense, income }) => {
 
     const postData = async (e) => {
         e.preventDefault();
-    
+
         const { amount, type, category, reference, description, date } = expense
 
 
@@ -64,7 +65,7 @@ const AddExpense = ({ thisYearExpense, income }) => {
                 }),
 
             }, { ...e, userid: user._id })
-     
+
             const data = await res.json()
             toast.success("Transaction Added Successfully ", {
                 position: "top-right",
@@ -76,7 +77,7 @@ const AddExpense = ({ thisYearExpense, income }) => {
                 progress: undefined,
                 theme: "colored",
             })
-        
+
 
 
         }
@@ -139,13 +140,16 @@ const AddExpense = ({ thisYearExpense, income }) => {
                                 {loading ? (
                                     <Loader />
                                 ) : (
-                                    <button
-                                        type="submit"
-                                        disabled={isFormDisabled}
-                                        className={`items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black`}
-                                    >
-                                        Submit your request
-                                    </button>
+                                    <>
+                                        <button
+                                            type="submit"
+                                            disabled={isFormDisabled}
+                                            className={`items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black`}
+                                        >
+                                            Submit your request
+                                        </button>
+                                        
+                                    </>
                                 )}
                             </div>
                         </form>

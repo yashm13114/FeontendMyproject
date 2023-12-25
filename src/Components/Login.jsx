@@ -173,13 +173,14 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import { UserContext } from '../App';
+import BannedPage from './BannedPage';
 const Login = () => {
     initTE({ Input, Ripple });
     const { state, dispatch } = useContext(UserContext)
     const [registrationMessage, setRegistrationMessage] = useState("");
     const [loginLoading, setLoginLoading] = useState(false);
     const [registerLoading, setRegisterLoading] = useState(false);
-
+    const [wrongAttempts, setWrongAttempts] = useState(0);
     const navigate = useNavigate()
     // for login
     const [email, setEmail] = useState('')
@@ -190,11 +191,29 @@ const Login = () => {
     })
     const [expanded, setExpanded] = useState(true)
     let name, value;
-
+    if (wrongAttempts >= 5) {
+        // toast.error("Too many wrong attempts. You are temporarily banned for 10 minutes.", {
+        //     // ... (your toast configuration)
+        // });
+    
+        setTimeout(() => {
+            // Reset wrong attempts after 10 minutes
+            setWrongAttempts(0);
+        }, 600000); // 10 minutes in milliseconds
+        return <BannedPage />;
+    }
     const LoginUser = async (e) => {
         e.preventDefault();
         setLoginLoading(true);// Set loading to true when login is initiated
-
+        if (wrongAttempts >= 5) {
+        
+    
+            setTimeout(() => {
+                // Reset wrong attempts after 10 minutes
+                setWrongAttempts(0);
+            }, 600000); // 10 minutes in milliseconds
+            return <BannedPage />;
+        }
         try {
             const res = await fetch('https://server-yash.onrender.com/login', {
                 method: "POST",
@@ -208,6 +227,8 @@ const Login = () => {
 
             if (res.status === 400 || !data) {
                 toast.error("Invalid Credentials")
+                setWrongAttempts(wrongAttempts + 1);
+   
             } else {
                 if (email !== email || password !== password) {
                     toast.error("Invalid Credentials", {
@@ -220,7 +241,10 @@ const Login = () => {
                         progress: undefined,
                         theme: "colored"
                     })
+                    setWrongAttempts(wrongAttempts + 1);
+   
                 } else {
+                    setWrongAttempts(0);
                     dispatch({ type: "USER", payload: true })
                     localStorage.setItem('user', JSON.stringify({ ...data, password, email }))
                     toast.success("Login Successfully 🤩", {

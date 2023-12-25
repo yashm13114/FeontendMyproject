@@ -17,6 +17,7 @@ import Analytics from './Components/Analytics'
 import AnalyticsExpense from './Components/AnalyticsExpense'
 import AddExpense2 from './Components/AddExpense2'
 import Home2 from './Components/Home2'
+import BannedPage from './Components/BannedPage'
 export const UserContext = createContext()
 const Routnig = () => {
   return (
@@ -36,7 +37,7 @@ const Routnig = () => {
         <Route path="/Analytics" element={<Analytics />} />
         <Route path="/ForgotPass" element={<ForgotPass />} />
         <Route path="/AddExpense2" element={<AddExpense2 />} />
-
+        <Route path="/BannedPage" element={<BannedPage />} />
       </Routes>
     </BrowserRouter>
   )
