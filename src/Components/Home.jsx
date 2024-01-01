@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Home = () => {
   return (
     <>
@@ -12,7 +12,7 @@ const Home = () => {
           <h1 className="lg:text-6xl md:text-4xl text-2xl text-cyan-400">Your Money</h1>
           <p className='lg:text-xl md:text-4xl text-2xl mt-4'>Personal budgeting is the secret to financial freedom. Start your journey today.</p>
           <div className='grid justify-center'>
-            <button className='p-2 mt-10 pl-4 pr-4 rounded-lg text-white bg-black '><Link to='/Register'>Lets Go..</Link></button>
+            <button className='p-2 mt-10 pl-4 pr-4 rounded-lg text-white bg-black '><Link to='/Login'>Lets Go..</Link></button>
           </div>
         </div>
       </div>

@@ -251,7 +251,11 @@ const ManageExpense = () => {
             <div className='lg:flex lg:justify-center mt-10'>
                 <Form form={form} component={false}>
                     {loading ? (
+                       <>
+                       <div className='flex justify-center items-center mt-64'>
                         <Loader />
+                       </div>
+                       </>
                     ) : (
                         <div className='overflow-x-auto'>
                             <Table dataSource={allTransactions} columns={columns} />

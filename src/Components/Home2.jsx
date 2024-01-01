@@ -1,9 +1,10 @@
 import React from 'react'
-
+import Home from './Home'
+import { Link } from 'react-router-dom'
 const Home2 = () => {
   return (
     <>
-      <div className='lg:flex items-center mt-32 justify-center lg:ml-44 '>
+     <div className='lg:flex items-center mt-32 justify-center lg:ml-44 '>
         <div className='lg:w-2/5 md:w-2/6 w-full lg:ml-10 ml-0'>
           <img src="https://codinginpublic.dev/projects/react-router-budget-app/assets/illustration-4f619ef1.jpg" alt="" className='p-10  w-full h-auto rounded-md' />
         </div>

@@ -163,7 +163,11 @@ const Dashboard = ({ thisYearExpense }) => {
 
     <animated.div style={animatedProps}>
       {loading ? (
+      <>
+      <div className='flex justify-center items-center mt-64'>
         <Loader />
+      </div>
+      </>
       ) : (
         <div className='container mx-auto p-10'>
           {/* <div className='lg:flex justify-center items-center lg:pl-72 lg:pr-72  pl-0 pr-0  flex-col   gap-4'>

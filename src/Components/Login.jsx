@@ -195,7 +195,7 @@ const Login = () => {
         // toast.error("Too many wrong attempts. You are temporarily banned for 10 minutes.", {
         //     // ... (your toast configuration)
         // });
-    
+
         setTimeout(() => {
             // Reset wrong attempts after 10 minutes
             setWrongAttempts(0);
@@ -206,8 +206,8 @@ const Login = () => {
         e.preventDefault();
         setLoginLoading(true);// Set loading to true when login is initiated
         if (wrongAttempts >= 5) {
-        
-    
+
+
             setTimeout(() => {
                 // Reset wrong attempts after 10 minutes
                 setWrongAttempts(0);
@@ -228,7 +228,7 @@ const Login = () => {
             if (res.status === 400 || !data) {
                 toast.error("Invalid Credentials")
                 setWrongAttempts(wrongAttempts + 1);
-   
+
             } else {
                 if (email !== email || password !== password) {
                     toast.error("Invalid Credentials", {
@@ -242,7 +242,7 @@ const Login = () => {
                         theme: "colored"
                     })
                     setWrongAttempts(wrongAttempts + 1);
-   
+
                 } else {
                     setWrongAttempts(0);
                     dispatch({ type: "USER", payload: true })
@@ -279,7 +279,7 @@ const Login = () => {
 
     const postData = async (e) => {
         e.preventDefault();
-  
+
         const { name, email, password, cpassword } = user;
 
         if (!name || !email || !password || !cpassword) {
@@ -345,12 +345,12 @@ const Login = () => {
                             className="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
 
                             <img
-                                src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=2000"
+                                src="https://media.licdn.com/dms/image/D4D12AQEN1d6jciWmPA/article-cover_image-shrink_720_1280/0/1699362339956?e=2147483647&v=beta&t=2fsB1-R8OoFE5xYeUs9fCsy44CL3SN0sF46XPDFSZ6M"
                                 className="w-[500px] lg:block hidden  mx-auto "
                                 alt="Sample image" />
                         </div>
 
-                        <div className="main w-[400px] lg:max-h-[514px] md:max-h-[500px] max-h-[490px]">
+                        <div className="main w-[400px] lg:max-h-[535px] md:max-h-[544px] max-h-[525px]">
 
 
 
@@ -365,8 +365,15 @@ const Login = () => {
                                     <input className="input" type="password" name="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)} placeholder="Password" required="" />
+                                    <div className='flex justify-center'>
+                                        <Link to="/Reset" className='text-blue-400'>Forgot password?</Link>
+                                    </div>
                                     {loginLoading ? (
-                                        <Loader />
+                                        <>
+                                            <div className='flex justify-center items-center'>
+                                                <Loader />
+                                            </div>
+                                        </>
                                     ) : (
 
                                         <button type='submit' onClick={LoginUser} className='bg-white hover:text-white hover:bg-gray-700'>Log in</button>
@@ -381,8 +388,8 @@ const Login = () => {
 
                                     </div>
                                 )}
-                               
-                             
+
+
                                 <form className="form">
                                     <label for="chk" aria-hidden="true">Register</label>
                                     <input className="input" type="text" value={user.name}
@@ -398,7 +405,11 @@ const Login = () => {
                                         name='cpassword'
                                         onChange={handleInputs} placeholder="Password" required="" />
                                     {registerLoading ? (
-                                        <Loader />
+                                        <>
+                                            <div className='flex justify-center items-center '>
+                                                <Loader />
+                                            </div>
+                                        </>
                                     ) : (
 
                                         <button type='submit' onClick={postData} className='bg-black text-white hover:text-black hover:bg-white'>Register</button>
