@@ -1,5 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import FAQ from './FAQ'
+import { FaArrowRight } from "react-icons/fa";
+const faqData = [
+  {
+    id: 1,
+    question: 'How do I add a new expense?',
+    answer: 'To add a new expense, go to the "Add Expense" section and fill in the required details.',
+  },
+  {
+    id: 2,
+    question: 'Can I customize budget categories?',
+    answer: 'Yes, you can customize budget categories in the "Settings" menu.',
+  },
+  // Add more FAQ items as needed
+];
 const Home = () => {
   return (
     <>
@@ -15,10 +30,30 @@ const Home = () => {
             <button className='p-2 mt-10 pl-4 pr-4 rounded-lg text-white bg-black '><Link to='/Login'>Lets Go..</Link></button>
           </div>
         </div>
+
       </div>
-      
-     
-      
+
+      <div className="mt-8 grid justify-center pb-10 lg:pl-0 lg:pr-0 pl-5 pr-5">
+        <h2 className="lg:text-3xl md:text-2xl text-xl mt-6 font-semibold text-cyan-500">Why Choose Our Daily Expense Tracker:</h2>
+        <p className="lg:text-xl md:text-2xl text-lg mt-4">
+          Keeping track of your expenses has never been this easy. Our Daily Expense Tracker offers:
+        </p>
+        <ul className="list-decimal list-inside text-left mt-4">
+          <li>Effortless Expense Logging: Record your spending in seconds.</li>
+          <li>Smart Budgeting: Set personalized budgets and track your progress.</li>
+          <li>Insights at a Glance: Visualize your financial habits with clear charts and graphs.</li>
+          {/* <li>Secure and Private: Your financial data is encrypted and fully secure.</li> */}
+          <li>User-Friendly Interface: Intuitive design for a seamless experience.</li>
+        </ul>
+      </div>
+      <FAQ />
+  
+
+
+
+
+
+
     </>
   )
 }

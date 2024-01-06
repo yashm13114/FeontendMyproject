@@ -32,7 +32,7 @@ const Navbar = () => {
               </h1>
               <div className="my-4 border-b border-gray-100 pb-4">
                 <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                  <RxDashboard  className="lg:text-2xl md:text-2xl text-3xl text-gray-600 group-hover:text-white "  />
+                  <RxDashboard className="lg:text-2xl md:text-2xl text-3xl text-gray-600 group-hover:text-white " />
                   <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
                     {/* <a href="/Dashboard">Dashboard</a> */}
                     <Link to="/Dashboard">Dashboard</Link>
@@ -56,9 +56,9 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                  <TiLockClosed  className="text-2xl text-gray-600 group-hover:text-white " />
+                  <TiLockClosed className="text-2xl text-gray-600 group-hover:text-white " />
                   <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
-                
+
                     <Link to="/Reset">Change Password</Link>
 
                   </h3>
@@ -110,7 +110,7 @@ const Navbar = () => {
                     <Link to="/AddExpense2" className='ml-4'>Add Expense</Link>
                   </h3>
                 </div>
-                <div  className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
+                <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
 
                   <h3 className="text-base flex text-gray-800 group-hover:text-white font-semibold " >
                     <AiFillSetting className="lg:text-2xl md:text-2xl text-4xl text-gray-600 group-hover:text-white mr-4" />

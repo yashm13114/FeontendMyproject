@@ -12,12 +12,13 @@
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.0",
         "@headlessui/react": "^1.7.15",
+        "@mantine/core": "^7.3.2",
         "antd": "^5.11.2",
         "apexcharts": "^3.44.2",
         "axios": "^1.6.0",
-
         "moment": "^2.29.4",
         "react": "^18.2.0",
+        "react-accessible-accordion": "^5.0.0",
         "react-apexcharts": "^1.4.1",
         "react-chartjs-2": "latest_version",
         "react-dom": "^18.2.0",
