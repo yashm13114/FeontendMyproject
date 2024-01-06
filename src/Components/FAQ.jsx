@@ -4,7 +4,7 @@ const FAQ = ({ faqData }) => {
     const [showAnswer, setShowAnswer] = useState(false);
     return (
         <>
-            <div className=" max-w-5xl py-3 mx-auto mt-32 tracking-wide md:px-4 md:mt-10 lg:p-0 md:p-0 p-6">
+            <div className=" max-w-5xl py-3 mx-auto mt-2 tracking-wide md:px-4 md:mt-10 lg:p-0 md:p-0 p-6">
                 <div className="flex justify-center text-3xl">Frequently Asked Questions</div>
 
                 <div className="grid gap-3 py-8 text-lg leading-6 text-gray-800 md:gap-8 md:grid-cols-2">
