@@ -44,6 +44,7 @@ import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserContext } from '../App';
+import Loader from './Loader';
 
 const Logout = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -88,7 +89,7 @@ const Logout = () => {
   }, []); // Empty dependency array to run the effect only once on mount
 
   // Your component should return JSX, make sure to return something here
-  return <div>Logging out...</div>;
+  return <Loader />;
 };
 
 export default Logout;

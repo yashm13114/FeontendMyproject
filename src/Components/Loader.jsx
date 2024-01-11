@@ -4,7 +4,7 @@ function Loader() {
     return (
 
         <>
-            <div id="wifi-loader" className=' m-0 flex justify-center items-center h-screen'>
+            {/* <div id="wifi-loader" className=' m-0 flex justify-center items-center h-screen'>
                 <svg className="circle-outer" viewBox="0 0 86 86">
                     <circle className="back" cx="43" cy="43" r="40"></circle>
                     <circle className="front" cx="43" cy="43" r="40"></circle>
@@ -19,6 +19,18 @@ function Loader() {
                     <circle className="front" cx="17" cy="17" r="14"></circle>
                 </svg>
                 <div className="text" data-text="Loading"></div>
+            </div> */}
+            <div className='inline-block'>
+                <div className="spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+
+                </div><br />
+                <h1 className='text-blue-500'>Loading...</h1>
             </div>
         </>
     )
