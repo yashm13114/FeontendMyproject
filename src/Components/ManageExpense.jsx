@@ -7,6 +7,7 @@ import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import { MdDelete } from "react-icons/md";
 import Analytics from './Analytics';
 import { toast } from 'react-toastify';
+import * as XLSX from 'xlsx';
 import Loader from './Loader';
 const ManageExpense = () => {
     const [allTransactions, setallTransactions] = useState([])
@@ -15,6 +16,31 @@ const ManageExpense = () => {
     const [form] = Form.useForm();
     const [updateForm, setUpdateForm] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const handleDownloadReport = () => {
+        // Create a function to fetch the data for the report
+        const getReportData = async () => {
+          try {
+            // Fetch data from the server or use 'allTransactions' state directly
+            const reportData = allTransactions; // Modify this line based on your data source
+    
+            // Convert the data to a worksheet
+            const ws = XLSX.utils.json_to_sheet(reportData);
+    
+            // Create a workbook and add the worksheet
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1');
+    
+            // Save the workbook as an Excel file
+            XLSX.writeFile(wb, 'expense_report.xlsx');
+          } catch (error) {
+            console.error('Error generating or downloading the report:', error);
+          }
+        };
+    
+        // Call the function to get and download the report data
+        getReportData();
+      };
     // update values
     const handleEdit = (record) => {
         setEditable(record._id);
@@ -251,17 +277,23 @@ const ManageExpense = () => {
             <div className='lg:flex lg:justify-center mt-10'>
                 <Form form={form} component={false}>
                     {loading ? (
-                       <>
-                       <div className='flex justify-center items-center mt-64'>
-                        <Loader />
-                       </div>
-                       </>
+                        <>
+                            <div className='flex justify-center items-center mt-64'>
+                                <Loader />
+                            </div>
+                        </>
                     ) : (
                         <div className='overflow-x-auto'>
                             <Table dataSource={allTransactions} columns={columns} />
                         </div>
                     )}
                 </Form>
+                <div className="flex justify-center ml-10  lg:mt-0 mt-10">
+                    <Button type="" className='bg-blue-500 hover:bg-blue-700' onClick={handleDownloadReport}>
+                        Download Report
+                    </Button>
+                </div>
+
             </div>
 
 

@@ -27,7 +27,8 @@
         "react-spring": "^9.7.3",
         "react-toastify": "^9.1.3",
         "recharts": "^2.8.0",
-        "tw-elements": "^1.0.0-beta2"
+        "tw-elements": "^1.0.0-beta2",
+        "xlsx": "^0.18.5"
     },
     "devDependencies": {
         "@types/react": "^18.0.37",

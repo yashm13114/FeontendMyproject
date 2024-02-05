@@ -1,20 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import FAQ from './FAQ'
-import { FaArrowRight } from "react-icons/fa";
-const faqData = [
-  {
-    id: 1,
-    question: 'How do I add a new expense?',
-    answer: 'To add a new expense, go to the "Add Expense" section and fill in the required details.',
-  },
-  {
-    id: 2,
-    question: 'Can I customize budget categories?',
-    answer: 'Yes, you can customize budget categories in the "Settings" menu.',
-  },
-  // Add more FAQ items as needed
-];
+
 const Home = () => {
   return (
     <>
@@ -47,13 +34,6 @@ const Home = () => {
         </ul>
       </div>
       <FAQ />
-  
-
-
-
-
-
-
     </>
   )
 }

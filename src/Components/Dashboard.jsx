@@ -8,6 +8,7 @@ import ReactApexChart from 'react-apexcharts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './Loader';
+import * as XLSX from 'xlsx';
 import '../App.css'
 const Dashboard = ({ thisYearExpense }) => {
   const [todayExpense, setTodayExpense] = useState(0);
@@ -142,6 +143,28 @@ const Dashboard = ({ thisYearExpense }) => {
     })
   }
 
+  const handleDownloadReport = () => {
+    // Generate the report data
+    const reportData = {
+      todayExpense,
+      last7DaysExpense,
+      last30DaysExpense,
+      currentYearExpense,
+      // Add more data as needed
+    };
+  
+    // Create a worksheet
+    const ws = XLSX.utils.json_to_sheet([reportData]);
+  
+    // Create a workbook
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Expense_Report');
+  
+    // Save the file
+    XLSX.writeFile(wb, 'Expense_Report.xlsx');
+  };
+  
+
   const renderGraph = () => {
     switch (selectedGraph) {
       case 'bar':
@@ -244,6 +267,11 @@ const Dashboard = ({ thisYearExpense }) => {
               </div>
             </div>
           </div>
+          <div className='text-center mt-4'>
+          <button onClick={handleDownloadReport} className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700'>
+            Download Report
+          </button>
+        </div>
 
 
 
