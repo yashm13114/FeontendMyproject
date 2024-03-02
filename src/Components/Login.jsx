@@ -160,13 +160,12 @@
 // export default Login
 
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import {
     Input,
     Ripple,
     initTE,
 } from "tw-elements";
-import Navbar from './Navbar'
 import '../App.css'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -180,7 +179,9 @@ const Login = () => {
     const [registrationMessage, setRegistrationMessage] = useState("");
     const [loginLoading, setLoginLoading] = useState(false);
     const [registerLoading, setRegisterLoading] = useState(false);
-    const [wrongAttempts, setWrongAttempts] = useState(0);
+    const [wrongAttempts, setWrongAttempts] = useState(
+        parseInt(localStorage.getItem('wrongAttempts')) || 0
+    );
     const navigate = useNavigate()
     // for login
     const [email, setEmail] = useState('')
@@ -191,10 +192,12 @@ const Login = () => {
     })
     const [expanded, setExpanded] = useState(true)
     let name, value;
+    useEffect(() => {
+        // Store wrongAttempts in local storage whenever it changes
+        localStorage.setItem('wrongAttempts', wrongAttempts.toString());
+    }, [wrongAttempts]);
     if (wrongAttempts >= 5) {
-        // toast.error("Too many wrong attempts. You are temporarily banned for 10 minutes.", {
-        //     // ... (your toast configuration)
-        // });
+        
 
         setTimeout(() => {
             // Reset wrong attempts after 10 minutes
