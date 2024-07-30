@@ -94,6 +94,7 @@ const Profile = () => {
                         </p>
                     </div>
                 </div>
+                <h1>hello i am yash mehta</h1>
             </div>
             {/* <section className="pt-16 bg-blueGray-50">
                 <form action="" method="GET">
